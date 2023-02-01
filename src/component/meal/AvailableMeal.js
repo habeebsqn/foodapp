@@ -35,6 +35,7 @@ const AvailableMeal = () => {
 
       setLoadedMeals(loaded);
     } catch (error) {
+      setIsLoading(false);
       setError(error.message);
     }
     setIsLoading(false);
@@ -59,7 +60,7 @@ const AvailableMeal = () => {
       <Card>
         <ul>
           {isLoading && !error ? <p>THE MEALS ARE COMING!</p> : listOfMealS}
-          {!isLoading && error && <p>{error}</p>}
+          {error && <p>{error}</p>}
         </ul>
       </Card>
     </div>
