@@ -20,7 +20,6 @@ const AvailableMeal = () => {
       }
 
       const data = await response.json();
-      console.log(data);
 
       const loaded = [];
 
