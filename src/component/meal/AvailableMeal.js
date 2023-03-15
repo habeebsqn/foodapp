@@ -13,7 +13,7 @@ const AvailableMeal = () => {
     setError(null);
     try {
       const response = await fetch(
-        "https://food-hhtp-default-rtdb.firebaseio.com/meals.json"
+        "https://react-http-be4bf-default-rtdb.firebaseio.com/meals.json"
       );
       if (!response.ok) {
         throw new Error("Something went wrong!");
