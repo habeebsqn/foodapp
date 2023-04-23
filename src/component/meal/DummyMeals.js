@@ -17,6 +17,12 @@ const DUMMY_MEALS = [
     description: "American, raw, meaty",
     price: 12.99,
   },
+  {
+    id: "m4",
+    name: "cake",
+    description: "dilicious",
+    price: "33",
+  },
 ];
 
 export default DUMMY_MEALS;
