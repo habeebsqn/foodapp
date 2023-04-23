@@ -19,7 +19,6 @@ const Checkout = (props) => {
       enteredName !== "" &&
       enteredStreet !== "" &&
       enteredPostal !== "" &&
-      enteredPostal.length === 5 &&
       enteredCity !== ""
     )
       props.onConfirm({
