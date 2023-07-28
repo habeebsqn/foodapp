@@ -3,19 +3,17 @@ import classes from "./AvailableMeal.module.css";
 import MealItem from "./MealItem";
 import Card from "../UI/Card";
 
-
 const AvailableMeal = () => {
   const [loadedMeals, setLoadedMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  
 
   const fetchmealsHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
       const response = await fetch(
-        "https://foods-h-default-rtdb.firebaseio.com/meals.json"
+        "https://food-http-de367-default-rtdb.firebaseio.com/meals.json"
       );
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -32,7 +30,6 @@ const AvailableMeal = () => {
           description: data[key].description,
           price: data[key].price,
         });
-
       }
 
       setLoadedMeals(loaded);

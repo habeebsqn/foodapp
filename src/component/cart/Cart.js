@@ -8,7 +8,6 @@ import { cartSliceAction } from "../../store/cartSlice";
 import Checkout from "./Checkout";
 
 const Cart = () => {
-  
   const dispatch = useDispatch();
   const [isCheckOut, setIsCheckOut] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,10 +41,13 @@ const Cart = () => {
 
   const onPostHandler = async (userData) => {
     setIsSubmitting(true);
-    await fetch("https://foods-h-default-rtdb.firebaseio.com/orders.json", {
-      method: "POST",
-      body: JSON.stringify({ customer: userData, order: items }),
-    });
+    await fetch(
+      "https://food-http-de367-default-rtdb.firebaseio.com/orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify({ customer: userData, order: items }),
+      }
+    );
     setIsSubmitting(false);
     setIsSubmitted(true);
     dispatch(cartSliceAction.clearCartHandler());
