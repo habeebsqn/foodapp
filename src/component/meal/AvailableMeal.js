@@ -3,7 +3,7 @@ import classes from "./AvailableMeal.module.css";
 import MealItem from "./MealItem";
 import Card from "../UI/Card";
 
-import { useDispatch } from "react-redux";
+
 const AvailableMeal = () => {
   const [loadedMeals, setLoadedMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
