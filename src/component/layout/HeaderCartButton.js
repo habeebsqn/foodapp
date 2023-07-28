@@ -1,11 +1,12 @@
-import React, {  useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./HeaderCartButton.module.css";
 import CartIcon from "../cart/CartIcon";
-import { useSelector } from "react-redux";
+import cartContext from "../../store/CartContext";
 const CartButton = (props) => {
-  const items =useSelector(state=>state.cart.items)
   const [onBtnBump, setOnBtnBump] = useState(false);
- 
+  const cartCtx = useContext(cartContext);
+  const items = cartCtx.items;
+
   const amtOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);

@@ -3,12 +3,10 @@ import classes from "./AvailableMeal.module.css";
 import MealItem from "./MealItem";
 import Card from "../UI/Card";
 
-import { useDispatch } from "react-redux";
 const AvailableMeal = () => {
   const [loadedMeals, setLoadedMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  
 
   const fetchmealsHandler = useCallback(async () => {
     setIsLoading(true);
@@ -32,7 +30,6 @@ const AvailableMeal = () => {
           description: data[key].description,
           price: data[key].price,
         });
-
       }
 
       setLoadedMeals(loaded);
