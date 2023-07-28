@@ -21,11 +21,8 @@ const DUMMY_MEALS = [
     id: "m4",
     name: "cake",
     description: "dilicious",
-    price: 33,
+    price: "33",
   },
-
-  //
-  //
 ];
 
 export default DUMMY_MEALS;
