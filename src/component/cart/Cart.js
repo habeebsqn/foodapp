@@ -1,25 +1,35 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import Modal from "../UI/Modal/Modal";
-import cartContext from "../../store/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { uiSliceAction } from "../../store/uiSlice";
+import { cartSliceAction } from "../../store/cartSlice";
 import Checkout from "./Checkout";
-const Cart = (props) => {
+
+const Cart = () => {
+
+  const dispatch = useDispatch();
   const [isCheckOut, setIsCheckOut] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const cartCtx = useContext(cartContext);
+  const items = useSelector((state) => state.cart.items);
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
 
-  const updatedTotalAmt = `$${cartCtx.totalAmount.toFixed(2)}`;
+  const updatedTotalAmt = `$${totalAmount.toFixed(2)}`;
 
-  const cartHasItem = cartCtx.items.length > 0;
+  const cartHasItem = items.length > 0;
+
+  const cartCloseHandler = () => {
+    dispatch(uiSliceAction.closeCartHandler());
+  };
 
   const onAddHandler = (item) => {
-    cartCtx.addItem({ ...item, amount: 1 });
+    dispatch(cartSliceAction.addItemHandler({ ...item, amount: 1 }));
   };
 
   const onRemoveHandler = (id) => {
-    cartCtx.removeItem(id);
+    dispatch(cartSliceAction.removeItemhandler(id));
   };
 
   const onHandleOrder = () => {
@@ -34,16 +44,16 @@ const Cart = (props) => {
     setIsSubmitting(true);
     await fetch("https://foods-h-default-rtdb.firebaseio.com/orders.json", {
       method: "POST",
-      body: JSON.stringify({ customer: userData, orders: cartCtx.items }),
+      body: JSON.stringify({ customer: userData, order: items }),
     });
     setIsSubmitting(false);
     setIsSubmitted(true);
-    cartCtx.clearCart();
+    dispatch(cartSliceAction.clearCartHandler());
   };
 
   const cart = (
     <ul className={classes["cart-items"]}>
-      {cartCtx.items.map((item) => (
+      {items.map((item) => (
         <CartItem
           key={item.id}
           name={item.name}
@@ -71,7 +81,7 @@ const Cart = (props) => {
           <button
             className={classes["button--alt"]}
             type="button"
-            onClick={props.onClick}
+            onClick={cartCloseHandler}
           >
             close
           </button>
@@ -93,15 +103,17 @@ const Cart = (props) => {
         <button
           className={classes["button--alt"]}
           type="button"
-          onClick={props.onClick}
+          onClick={cartCloseHandler}
         >
           close
         </button>
       </div>
     </React.Fragment>
   );
+
+
   return (
-    <Modal onClick={props.onClick}>
+    <Modal onClick={cartCloseHandler}>
       {isSubmitting && submitting}
       {isSubmitted && submitted}
       {!isSubmitting && !isSubmitted && cartContent}
