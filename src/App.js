@@ -1,27 +1,21 @@
-import React, { useState } from "react";
+import React  from "react";
 import Header from "./component/layout/Header";
 import Meal from "./component/meal/Meal";
 import Cart from "./component/cart/Cart";
-import CartContextProvider from "./store/CartContextProvider";
+import { useSelector } from "react-redux";
+
+
 function App() {
-  const [openCart, setOpenCart] = useState(false);
-
-  const openCartHandler = () => {
-    setOpenCart(true);
-  };
-
-  const closeCartHandler = () => {
-    setOpenCart(false);
-  };
+  const openCart =useSelector(state=>state.ui.openCart)
 
   return (
-    <CartContextProvider>
-      <Header onClick={openCartHandler} />
+    <>
+      <Header />
       <main>
-        {openCart && <Cart onClick={closeCartHandler} />}
+        {openCart && <Cart />}
         <Meal />
       </main>
-    </CartContextProvider>
+    </>
   );
 }
 
