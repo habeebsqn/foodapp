@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import Modal from "../UI/Modal/Modal";
@@ -8,7 +8,7 @@ import { cartSliceAction } from "../../store/cartSlice";
 import Checkout from "./Checkout";
 
 const Cart = () => {
-
+  
   const dispatch = useDispatch();
   const [isCheckOut, setIsCheckOut] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -110,7 +110,6 @@ const Cart = () => {
       </div>
     </React.Fragment>
   );
-
 
   return (
     <Modal onClick={cartCloseHandler}>
